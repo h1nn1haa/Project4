@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.IO.Ports" Version="6.0.0" />
+    <PackageReference Include="WinForms.DataVisualization" Version="1.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="DistributedDLL">
+      <HintPath>..\DistributedDLL\bin\$(Configuration)\net6.0\DistributedDLL.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
