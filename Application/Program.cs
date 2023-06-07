@@ -44,7 +44,7 @@ namespace APP
             // System connected, start the stream!
             Console.WriteLine("\n\nApplication Message  - Connected to Port, will now run indefinitely\n");
 
-            Console.WriteLine("Application Message - Press A to (re)send a start streaming message, B to send a stop streaming message, Q to quit");
+            Console.WriteLine("Application Message - Press A to start therapy, B to stop therapy, Q to quit");
             while (api.IsAlive)
             {
                 switch(Console.ReadKey().Key)
@@ -53,12 +53,12 @@ namespace APP
                         Console.WriteLine("Application Console Message - Exit key detected. Closing...");
                         return;
                     case ConsoleKey.A:
-                        Console.WriteLine("\nStarting streaming...");
-                        api.StartStreaming();
+                        Console.WriteLine("\nStarting therapy...");
+                        api.StartTherapy();
                         break;
                     case ConsoleKey.B:
-                        Console.WriteLine("\nStopping streaming...");
-                        api.StopStreaming();
+                        Console.WriteLine("\nStopping thearpy...");
+                        api.StopTherapy();
                         break;
                 }
             }
@@ -66,10 +66,10 @@ namespace APP
 
         private static void Api_streamDataEvent(object? sender, StreamDataEventArgs e)
         {
-            Console.Write("Application Message  - New Streamed Data Event: ");
-            Console.Write(e.Data);
-            Console.Write(" Timestamp: ");
-            Console.WriteLine(e.Timestamp.ToString("0.000"));
+            //Console.Write("Application Message  - New Streamed Data Event: ");
+            //Console.Write(e.Data);
+            //Console.Write(" Timestamp: ");
+            //Console.WriteLine(e.Timestamp.ToString("0.000"));
         }
     }
 }

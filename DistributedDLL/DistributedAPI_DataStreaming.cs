@@ -23,6 +23,9 @@ namespace DistributedDLL
 
         public event EventHandler<StreamDataEventArgs>? StreamDataEvent;
 
+        private static double DYNAMIC_RANGE = 3932.0;
+        private static double X_MIN = -1885.0032958984373;
+
         /// <summary>
         /// Executes a transaction with the distributed system which begins data streaming. Additionally opens a new file to log the data streamed to.
         /// </summary>
@@ -118,10 +121,10 @@ namespace DistributedDLL
             this.IsStreaming = false;
         }
 
-
-        private static ushort DecodeStreamData(Packet streamPacket)
+        private static double DecodeStreamData(Packet streamPacket)
         {
-            return (ushort)(streamPacket.Payload[4] | streamPacket.Payload[5] << 8);
+            ushort data = (ushort)(streamPacket.Payload[4] | streamPacket.Payload[5] << 8);
+            return data / 65536.0 * DYNAMIC_RANGE + X_MIN;
         }
 
         private static uint DecodeStreamTimestamp(Packet streamPacket)
@@ -142,7 +145,7 @@ namespace DistributedDLL
             {
                 if (this._streamBuffer.TryTake(out Packet? streamPacket, 100))
                 {
-                    ushort data = DistributedAPI.DecodeStreamData(streamPacket);
+                    double data = DistributedAPI.DecodeStreamData(streamPacket);
                     uint timestamp_ms = DistributedAPI.DecodeStreamTimestamp(streamPacket);
 
                     this.StreamDataEvent?.Invoke(this, new StreamDataEventArgs(streamPacket.PacketID, 0.001f * timestamp_ms, data));

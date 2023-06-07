@@ -19,7 +19,7 @@ namespace DistributedDLL
         /// <summary>
         /// The EEG data of the stream packet recieved
         /// </summary>
-        public ushort Data { get; private set; }
+        public double Data { get; private set; }
 
         /// <summary>
         /// The timestamp of the EEG data of the stream packet
@@ -28,7 +28,7 @@ namespace DistributedDLL
 
 
         // Constructor
-        public StreamDataEventArgs(byte packetID, float timestamp, ushort data)
+        public StreamDataEventArgs(byte packetID, float timestamp, double data)
         {
             // Assign internal variables
             this.PacketID = packetID;

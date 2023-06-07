@@ -22,7 +22,9 @@ namespace DistributedDLL
         CONNECT = 1,
         WATCHDOG_RESET = 2,
         STREAM_BEGIN = 3,
-        STREAM_END = 4
+        STREAM_END = 4,
+        START_STIMULATION = 5,
+        STOP_STIMULATION = 6
     }
 
     /// <summary>
@@ -35,9 +37,11 @@ namespace DistributedDLL
         ERR_BAD_PACKET_TYPE = 2,
         ERR_BAD_OPCODE = 3,
         ERR_ALREADY_CONNECTED = 4,
-        ERR_ALREADY_STREAMING = 5,
-        ERR_ALREADY_STOP_STREAMING = 6,
-        ERR_NOT_CONNECTED = 7
+        ERR_ALREADY_STREAMING = 6,
+        ERR_ALREADY_STOP_STREAMING = 7,
+        ERR_NOT_CONNECTED = 5,
+        ERR_ALREADY_DOING_THERAPY = 8,
+        ERR_ALREADY_STOP_THERAPY = 9
     }
 
     /// <summary>

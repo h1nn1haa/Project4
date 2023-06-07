@@ -54,6 +54,8 @@ namespace DistributedDLL
         private readonly SerialPort _serialPort;
         private readonly object _serialWriteLock;
 
+        private bool _initialConnect = true;
+
         /// <summary>
         /// Create an instance of the <see cref="DistributedAPI"/>. This doesn't not connect to serial ports.
         /// </summary>
@@ -169,6 +171,14 @@ namespace DistributedDLL
 
             Console.WriteLine("Distributed Interface DLL: Watchdog timer started successfully.");
 
+            if (_initialConnect)
+            {
+                Console.WriteLine("Distributed Interface DLL: Starting streaming...");
+                Thread.Sleep(2000);
+                this.StartStreaming();
+                _initialConnect = false;
+            }
+            
             return ConnectStatus.CONN_SUCCESS;
         }
 
