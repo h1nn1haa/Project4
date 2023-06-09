@@ -1,6 +1,6 @@
 ﻿/// University of Washington EEP 598/CSEP 590: Neural Devices, Systems, and Computation
-/// Project 2 - DLL Checkpoint Code
-/// Written by Jeffrey Herron and Cory Lam
+/// Project 4
+/// Han Diep
 
 using System;
 using System.IO;

@@ -1,4 +1,8 @@
-﻿using System.Collections.Concurrent;
+﻿/// University of Washington EEP 598/CSEP 590: Neural Devices, Systems, and Computation
+/// Project 4
+/// Han Diep
+
+using System.Collections.Concurrent;
 using System.Drawing;
 using System.Net.Mail;
 
@@ -122,12 +126,22 @@ namespace DistributedDLL
             this.IsStreaming = false;
         }
 
+        /// <summary>
+        /// Decode little endian stream data
+        /// </summary>
+        /// <param name="streamPacket"></param>
+        /// <returns></returns>
         private static double DecodeStreamData(Packet streamPacket)
         {
             ushort data = (ushort)(streamPacket.Payload[4] | streamPacket.Payload[5] << 8);
             return data / 65536.0 * DYNAMIC_RANGE + X_MIN;
         }
 
+        /// <summary>
+        /// Decode little endian stream timestamp
+        /// </summary>
+        /// <param name="streamPacket"></param>
+        /// <returns></returns>
         private static uint DecodeStreamTimestamp(Packet streamPacket)
         {
             uint timestamp = 0;
@@ -140,6 +154,9 @@ namespace DistributedDLL
             return timestamp;
         }
 
+        /// <summary>
+        /// Stream log handler that invokes stream data event and writes timestamp, data, classification state, and therapy state to file
+        /// </summary>
         private void StreamLogThreadHandler()
         {
             while (this.IsConnected)

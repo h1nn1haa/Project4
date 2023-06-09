@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿/// University of Washington EEP 598/CSEP 590: Neural Devices, Systems, and Computation
+/// Project 4
+/// Han Diep
+
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Data;
 

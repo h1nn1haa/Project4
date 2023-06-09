@@ -1,6 +1,8 @@
-﻿using System.Collections;
-using MathNet.Numerics.IntegralTransforms;
-using MathNet.Numerics;
+﻿/// University of Washington EEP 598/CSEP 590: Neural Devices, Systems, and Computation
+/// Project 4
+/// Han Diep
+
+using System.Collections;
 
 namespace DistributedDLL
 {
@@ -12,6 +14,9 @@ namespace DistributedDLL
         // true if therapy is being delivered, false otherwise
         private bool _therapyOn;
 
+        /// <summary>
+        /// Sends start therapy packet to INS
+        /// </summary>
         public void StartTherapy()
         {
             Packet req = new(PacketType.TRANSACTION, this._packetID, new byte[1] { (byte)OpCode.START_STIMULATION });
@@ -43,6 +48,9 @@ namespace DistributedDLL
             return;
         }
 
+        /// <summary>
+        /// Sends stop therapy packet to INS
+        /// </summary>
         public void StopTherapy() 
         {
             Packet req = new(PacketType.TRANSACTION, this._packetID, new byte[1] { (byte)OpCode.STOP_STIMULATION });
@@ -73,6 +81,9 @@ namespace DistributedDLL
             return;
         }
 
+        /// <summary>
+        /// Classifies signal with WINDOW_SIZE data points and starts therapy if seizure positive and stops therapy if seizure negative
+        /// </summary>
         private void ClassifyAndDeliverTherapyHandler()
         {
             while (this.IsConnected)

@@ -1,4 +1,8 @@
-﻿using System;
+﻿/// University of Washington EEP 598/CSEP 590: Neural Devices, Systems, and Computation
+/// Project 4
+/// Han Diep
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

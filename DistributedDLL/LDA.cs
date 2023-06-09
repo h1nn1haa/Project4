@@ -1,5 +1,8 @@
-﻿using MathNet.Numerics.IntegralTransforms;
-using MathNet.Numerics;
+﻿/// University of Washington EEP 598/CSEP 590: Neural Devices, Systems, and Computation
+/// Project 4
+/// Han Diep
+
+using MathNet.Numerics.IntegralTransforms;
 
 namespace DistributedDLL
 {
@@ -32,7 +35,11 @@ namespace DistributedDLL
             -0.0008435392980566357
         };
 
-        // return true if seizure positive, false if seizure negative
+        /// <summary>
+        /// Uses LDA + FFT to classify signal as either seizure positive or seizure negative
+        /// </summary>
+        /// <param name="signal"></param>
+        /// <returns>returns true if seizure positive, false if seizure negative</returns>
         private bool classify(double[] signal)
         {
 
@@ -58,33 +65,5 @@ namespace DistributedDLL
                 return this._classificationState; // seizure negative
             }
         }
-
-        /*
-        public void something()
-        {
-            int i = 0;
-
-            while (this.IsConnected)
-            {
-                this._eegDataBuffer.CopyTo(real_buffer);
-                Fourier.Forward(real_buffer, complex_buffer, FourierOptions.NoScaling);
-
-                i = 0;
-
-                foreach (double spectralPower in real_buffer.Zip(complex_buffer, (a, b) => a * a + b * b))
-                {
-                    psd[i++] = Math.Sqrt(spectralPower);
-                }
-
-                if (this._clf_lda.classify(psd))
-                {
-                    this.PerformTherapy();
-                }
-                else
-                {
-                    // no seizure
-                }
-            }
-        }*/
     }
 }

@@ -1,6 +1,6 @@
-﻿ /// University of Washington EEP 598/CSEP 590: Neural Devices, Systems, and Computation
-/// Project 1 - DLL Checkpoint Code
-/// Written by Jeffrey Herron, Cory Lam, and Ember Chow
+﻿/// University of Washington EEP 598/CSEP 590: Neural Devices, Systems, and Computation
+/// Project 4
+/// Han Diep
 
 using System.Collections.Concurrent;
 using System.Diagnostics;
@@ -53,8 +53,6 @@ namespace DistributedDLL
 
         private readonly SerialPort _serialPort;
         private readonly object _serialWriteLock;
-
-        private bool _initialConnect = true;
 
         /// <summary>
         /// Create an instance of the <see cref="DistributedAPI"/>. This doesn't not connect to serial ports.
@@ -175,14 +173,10 @@ namespace DistributedDLL
             this._timer.Start();
 
             Console.WriteLine("Distributed Interface DLL: Watchdog timer started successfully.");
-
-            if (_initialConnect)
-            {
-                Console.WriteLine("Distributed Interface DLL: Starting streaming...");
-                Thread.Sleep(500);
-                this.StartStreaming();
-                _initialConnect = false;
-            }
+            
+            Console.WriteLine("Distributed Interface DLL: Starting streaming...");
+            Thread.Sleep(500);
+            this.StartStreaming();
             
             return ConnectStatus.CONN_SUCCESS;
         }
