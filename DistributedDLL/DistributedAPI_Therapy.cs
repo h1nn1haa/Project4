@@ -1,4 +1,6 @@
 ﻿using System.Collections;
+using MathNet.Numerics.IntegralTransforms;
+using MathNet.Numerics;
 
 namespace DistributedDLL
 {

@@ -140,7 +140,6 @@ namespace DistributedDLL
             return timestamp;
         }
 
-        // TODO: log only after classification and therapy is given...time interval?
         private void StreamLogThreadHandler()
         {
             while (this.IsConnected)
@@ -154,7 +153,7 @@ namespace DistributedDLL
 
                     this.StreamDataEvent?.Invoke(this, new StreamDataEventArgs(streamPacket.PacketID, 0.001f * timestamp_ms, data));
 
-                    this._fsWriter?.WriteLine(timestamp_ms.ToString() + "," + data.ToString("0.00")  + "," + this._classificationState.ToString() + "," + this._therapyOn.ToString());
+                    this._fsWriter?.WriteLine(timestamp_ms.ToString() + "," + data.ToString("0.00") + "," + this._classificationState.ToString() + "," + this._therapyOn.ToString());
                 }
             }
         }

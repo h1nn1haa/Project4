@@ -82,7 +82,7 @@ namespace DistributedDLL
 
             this._serialRxThread = new Thread(this.RxThreadHandler);
             this._streamLoggerThread = new Thread(this.StreamLogThreadHandler);
-            //this._classifyAndDeliverTherapyThread = new Thread(this.ClassifyAndDeliverTherapyHandler);
+            this._classifyAndDeliverTherapyThread = new Thread(this.ClassifyAndDeliverTherapyHandler);
             this._therapyOn = false;
 
             this._timer.Elapsed += this.WatchdogElapsedEvent;
@@ -166,10 +166,11 @@ namespace DistributedDLL
 
             this._serialRxThread = new Thread(this.RxThreadHandler);
             this._streamLoggerThread = new Thread(this.StreamLogThreadHandler);
+            this._classifyAndDeliverTherapyThread = new Thread(this.ClassifyAndDeliverTherapyHandler);
 
             this._serialRxThread.Start();
             this._streamLoggerThread.Start();
-            //this._classifyAndDeliverTherapyThread.Start();
+            this._classifyAndDeliverTherapyThread.Start();
 
             this._timer.Start();
 
@@ -215,9 +216,9 @@ namespace DistributedDLL
                 this._serialRxThread.Join();
                 this._streamLoggerThread.Join();
 
-                /*this._classifyAndDeliverTherapyThread.Join();
+                this._classifyAndDeliverTherapyThread.Join();
                 this._streamData.Clear();
-                this.StopTherapy();*/
+                this.StopTherapy();
 
                 this._pendingRequests.Clear();
                 this._serialPort.Close();
