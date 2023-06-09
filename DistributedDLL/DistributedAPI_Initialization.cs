@@ -78,9 +78,12 @@ namespace DistributedDLL
 
             this._pendingRequests = new ConcurrentQueue<Request>();
             this._streamBuffer = new(new ConcurrentQueue<Packet>(), STREAM_BUFFER_CAPACITY);
+            this._streamData = new ConcurrentQueue<double>();
 
             this._serialRxThread = new Thread(this.RxThreadHandler);
             this._streamLoggerThread = new Thread(this.StreamLogThreadHandler);
+            //this._classifyAndDeliverTherapyThread = new Thread(this.ClassifyAndDeliverTherapyHandler);
+            this._therapyOn = false;
 
             this._timer.Elapsed += this.WatchdogElapsedEvent;
         }
@@ -166,6 +169,7 @@ namespace DistributedDLL
 
             this._serialRxThread.Start();
             this._streamLoggerThread.Start();
+            //this._classifyAndDeliverTherapyThread.Start();
 
             this._timer.Start();
 
@@ -174,7 +178,7 @@ namespace DistributedDLL
             if (_initialConnect)
             {
                 Console.WriteLine("Distributed Interface DLL: Starting streaming...");
-                Thread.Sleep(2000);
+                Thread.Sleep(500);
                 this.StartStreaming();
                 _initialConnect = false;
             }
@@ -211,8 +215,14 @@ namespace DistributedDLL
                 this._serialRxThread.Join();
                 this._streamLoggerThread.Join();
 
+                /*this._classifyAndDeliverTherapyThread.Join();
+                this._streamData.Clear();
+                this.StopTherapy();*/
+
                 this._pendingRequests.Clear();
                 this._serialPort.Close();
+
+
             }
         }
 

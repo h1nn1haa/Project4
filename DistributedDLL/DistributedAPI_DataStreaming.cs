@@ -18,6 +18,7 @@ namespace DistributedDLL
 
         private readonly BlockingCollection<Packet> _streamBuffer;
         private readonly ConcurrentQueue<Request> _pendingRequests;
+        private readonly ConcurrentQueue<double> _streamData;
 
         private Thread _serialRxThread, _streamLoggerThread;
 
@@ -139,6 +140,7 @@ namespace DistributedDLL
             return timestamp;
         }
 
+        // TODO: log only after classification and therapy is given...time interval?
         private void StreamLogThreadHandler()
         {
             while (this.IsConnected)
@@ -148,9 +150,11 @@ namespace DistributedDLL
                     double data = DistributedAPI.DecodeStreamData(streamPacket);
                     uint timestamp_ms = DistributedAPI.DecodeStreamTimestamp(streamPacket);
 
+                    _streamData.Enqueue(data);
+
                     this.StreamDataEvent?.Invoke(this, new StreamDataEventArgs(streamPacket.PacketID, 0.001f * timestamp_ms, data));
 
-                    this._fsWriter?.WriteLine(data.ToString() + "," + timestamp_ms.ToString());
+                    this._fsWriter?.WriteLine(timestamp_ms.ToString() + "," + data.ToString("0.00")  + "," + this._classificationState.ToString() + "," + this._therapyOn.ToString());
                 }
             }
         }

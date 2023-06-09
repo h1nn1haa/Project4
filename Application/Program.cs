@@ -66,10 +66,10 @@ namespace APP
 
         private static void Api_streamDataEvent(object? sender, StreamDataEventArgs e)
         {
-            //Console.Write("Application Message  - New Streamed Data Event: ");
-            //Console.Write(e.Data);
-            //Console.Write(" Timestamp: ");
-            //Console.WriteLine(e.Timestamp.ToString("0.000"));
+            Console.Write("Application Message  - New Streamed Data Event: ");
+            Console.Write(e.Data);
+            Console.Write(" Timestamp: ");
+            Console.WriteLine(e.Timestamp.ToString("0.000"));
         }
     }
 }
